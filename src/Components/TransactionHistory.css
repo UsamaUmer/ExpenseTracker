@@ -1,0 +1,82 @@
+.mainClass {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.mainClass ul {
+  padding: 0;
+  width: 300px;
+}
+
+.mainClass > div:nth-child(odd) h2 {
+  color: green;
+}
+
+.mainClass > div:nth-child(even) h2 {
+  color: red;
+}
+
+
+
+.historyItem {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  margin: 10px 0;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 16px;
+}
+
+.historyItem .amount {
+  font-weight: bold;
+}
+
+.historyItem .amount.plus {
+  color: #2ecc71; /* green */
+}
+
+.historyItem .amount.minus {
+  color: #e74c3c; /* red */
+}
+
+
+
+
+
+.btn-delete {
+  background: transparent;
+  border: 1.5px solid #e74c3c;
+  color: #e74c3c;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+/* hover effect = stronger alert */
+.btn-delete:hover {
+  background: #e74c3c;
+  color: #fff;
+  border-color: #c0392b;
+}
+
+.historyItem:hover {
+  background: #fafafa;
+}
+
+.historyItem:hover .btn-delete {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.btn-delete {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 0.2s ease;
+}

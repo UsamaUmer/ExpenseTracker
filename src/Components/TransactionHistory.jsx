@@ -1,23 +1,27 @@
 import { useContext } from "react";
 import { outputContext } from "./Context/AuthContext";
 
+import "./TransactionHistory.css";
 function TransactionHistory() {
-  const { totalHistory, deleteHistory} = useContext(outputContext);
+  const { totalHistory, deleteHistory } = useContext(outputContext);
   return (
-    <div>
+    <div className="mainClass">
       <div>
-        <h2>Income History</h2>
+        <h2>Income</h2>
         <ul>
           {totalHistory.length > 0 &&
             totalHistory.map((value) => {
               return (
                 value.operator === "+" && (
-                  <li key={value.id}>
-                    {`${value.description} is ${value.amount}`}
-                    <button
-                      id={value.id}
-                      onClick={() => deleteHistory(value.id)}
+                  <li key={value.id} className="historyItem">
+                    <span className="desc">{`${value.description} `}</span>
+                    <span
+                      className={`amount ${value.operator === "+" ? "plus" : "minus"}`}
                     >
+                      is
+                      {` ${value.amount}`}
+                    </span>
+                    <button className='btn-delete' onClick={() => deleteHistory(value.id)}>
                       Delete
                     </button>
                   </li>
@@ -27,18 +31,21 @@ function TransactionHistory() {
         </ul>
       </div>
       <div>
-        <h2>Expense History</h2>
+        <h2>Expense</h2>
         <ul>
           {totalHistory.length > 0 &&
             totalHistory.map((value) => {
               return (
                 value.operator === "-" && (
-                  <li key={value.id}>
-                    {`${value.description} is ${value.amount}`}{" "}
-                    <button
-                      id={value.id}
-                      onClick={() => deleteHistory(value.id)}
+                  <li key={value.id} className="historyItem">
+                    <span className="desc">{`${value.description} `}</span>
+                    <span
+                      className={`amount ${value.operator === "+" ? "plus" : "minus"}`}
                     >
+                      is
+                      {` ${value.amount}`}
+                    </span>
+                    <button className='btn-delete' onClick={() => deleteHistory(value.id)}>
                       Delete
                     </button>
                   </li>

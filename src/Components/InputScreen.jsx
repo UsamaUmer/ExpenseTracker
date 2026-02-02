@@ -1,9 +1,10 @@
 import React from "react";
 import { useContext, useState } from "react";
 import { outputContext } from "./Context/AuthContext";
+import "./InputScreen.css";
 
 function InputScreen() {
-  const {handleInputFormData} = useContext(outputContext);
+  const { handleInputFormData } = useContext(outputContext);
 
   const [inputFormData, setInputFormData] = useState({
     operator: "",
@@ -21,45 +22,49 @@ function InputScreen() {
   function submitHandle(e) {
     e.preventDefault();
     handleInputFormData(inputFormData);
+    setInputFormData(() => {
+      return { operator: "", description: "", amount: "" };
+    });
   }
   return (
-    <div>
-      <form action="" onSubmit={submitHandle}>
-        <select
-          required
-          name="operator"
-          id="operator"
-          value={inputFormData.operator}
-          onChange={handleFormChange}
-        >
-          <option value="" disabled hidden>
-            Select value
-          </option>
-          <option value="+">+</option>
-          <option value="-">-</option>
-        </select>
-        {/* {inputFormData.operator}
+    <form action="" onSubmit={submitHandle}>
+      <select
+        required
+        name="operator"
+        id="operator"
+        value={inputFormData.operator}
+        onChange={handleFormChange}
+        className="operator"
+      >
+        <option value="" disabled hidden>
+          Select operator
+        </option>
+        <option value="+">+</option>
+        <option value="-">-</option>
+      </select>
+      {/* {inputFormData.operator}
         {inputFormData.description}
         {inputFormData.amount} */}
-        <input
-          required
-          type="text"
-          placeholder="Add description"
-          id="description"
-          value={inputFormData.description}
-          onChange={handleFormChange}
-        />
-        <input
-          required
-          type="number"
-          placeholder="0"
-          id="amount"
-          value={inputFormData.amount}
-          onChange={handleFormChange}
-        />
-        <input type="submit" className="submit" value="Submit" />
-      </form>
-    </div>
+      <input
+        required
+        type="text"
+        placeholder="Add description"
+        id="description"
+        className="description"
+        value={inputFormData.description}
+        onChange={handleFormChange}
+      />
+      <input
+        required
+        type="number"
+        placeholder="0"
+        id="amount"
+        className="amount"
+        value={inputFormData.amount}
+        onChange={handleFormChange}
+      />
+      <input type="submit" className="submitBtn" value="✔" />
+    </form>
   );
 }
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { useContext, useState } from "react";
 import { outputContext } from "./Context/AuthContext";
-import './OutputScreen.css'
+import "./OutputScreen.css";
 
 function OutputScreen() {
   const { availableAmount, totalIncome, totalExpense } =
@@ -10,9 +10,21 @@ function OutputScreen() {
   //   const [totalIncome, setTotalIncome] = useState(0);
   return (
     <div className="OutputScreen">
-    <div className="availAmount">Available Amount {availableAmount !== 0 && availableAmount}</div>
-      <div className="totalIncome">Total Income {totalIncome !== 0 && totalIncome}</div>
-      <div className="totalExpense">Total Expense {totalExpense !== 0 && totalExpense}</div>
+      <div className="month">
+        Available Budget in{" "}
+        {new Date().toLocaleString("default", { month: "long" })}
+      </div>
+      <div className="availAmount">
+        {availableAmount !== 0 ? availableAmount : 0}
+      </div>
+      <div className="total Income">
+        <span>Total Income</span>{" "}
+        <span>{totalIncome}</span>
+      </div>
+      <div className="total Expense">
+        <span>Total Expense</span>{" "}
+        <span>{totalExpense}</span>
+      </div>
     </div>
   );
 }

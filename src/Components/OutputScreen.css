@@ -1,0 +1,44 @@
+.OutputScreen {
+  width: 100%;
+  height: 40vh;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url(https://expense-tracker-app-seven.vercel.app/static/media/back.501eb96d.png);
+    background-size: cover;
+  display: grid;
+  grid-auto-flow: row;
+  place-items: center;
+  color: white; 
+}
+
+.month{
+  font-size: 24px;
+}
+
+.availAmount{
+  font-size: 56px;
+}
+
+
+.total {
+  width: 30%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  font-size: 18px;
+  color: white;
+  border-radius: 4px;
+  margin-top: 10px;
+  maximum-width: 600px;
+}
+
+.total.Income {
+  background-color: #2ec4b6;
+}
+
+.total.Expense {
+  background-color: #ff5a5f;
+}
+
+
