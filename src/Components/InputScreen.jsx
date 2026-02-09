@@ -2,9 +2,12 @@ import React from "react";
 import { useContext, useState } from "react";
 import { outputContext } from "./Context/AuthContext";
 import "./InputScreen.css";
+import { useDispatch } from "react-redux";
+import { handleInputFormDatas } from './Context/Slice/authContext'
 
 function InputScreen() {
-  const { handleInputFormData } = useContext(outputContext);
+  // const { handleInputFormData } = useContext(outputContext);
+  const dispatch = useDispatch();
 
   const [inputFormData, setInputFormData] = useState({
     operator: "",
@@ -21,7 +24,8 @@ function InputScreen() {
 
   function submitHandle(e) {
     e.preventDefault();
-    handleInputFormData(inputFormData);
+    dispatch(handleInputFormDatas(inputFormData))
+    // handleInputFormData(inputFormData);
     setInputFormData(() => {
       return { operator: "", description: "", amount: "" };
     });

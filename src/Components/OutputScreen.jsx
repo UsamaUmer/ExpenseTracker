@@ -2,10 +2,14 @@ import React from "react";
 import { useContext, useState } from "react";
 import { outputContext } from "./Context/AuthContext";
 import "./OutputScreen.css";
+import { useSelector } from "react-redux";
+
 
 function OutputScreen() {
   const { availableAmount, totalIncome, totalExpense } =
     useContext(outputContext);
+
+    const {availableAmounts, totalExpenses, totalIncomes} = useSelector((state) => state.expenseTracker);
   //   const [totalExpense, setTotalExpense] = useState(0);
   //   const [totalIncome, setTotalIncome] = useState(0);
   return (
@@ -15,15 +19,15 @@ function OutputScreen() {
         {new Date().toLocaleString("default", { month: "long" })}
       </div>
       <div className="availAmount">
-        {availableAmount !== 0 ? availableAmount : 0}
+        {availableAmounts !== 0 ? availableAmounts : 0}
       </div>
       <div className="total Income">
         <span>Total Income</span>{" "}
-        <span>{totalIncome}</span>
+        <span>{totalIncomes}</span>
       </div>
       <div className="total Expense">
         <span>Total Expense</span>{" "}
-        <span>{totalExpense}</span>
+        <span>{totalExpenses}</span>
       </div>
     </div>
   );

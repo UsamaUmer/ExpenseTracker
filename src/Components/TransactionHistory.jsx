@@ -1,16 +1,22 @@
 import { useContext } from "react";
 import { outputContext } from "./Context/AuthContext";
+import { useDispatch, useSelector } from "react-redux";
+import {deleteHistorys} from './Context/Slice/authContext';
 
 import "./TransactionHistory.css";
+
+
 function TransactionHistory() {
-  const { totalHistory, deleteHistory } = useContext(outputContext);
+  const dispatch = useDispatch();
+  const { totalHistorys } = useSelector((state) => state.expenseTracker);
+  // const { totalHistory, deleteHistory } = useContext(outputContext);
   return (
     <div className="mainClass">
       <div>
         <h2>Income</h2>
         <ul>
-          {totalHistory.length > 0 &&
-            totalHistory.map((value) => {
+          {totalHistorys.length > 0 &&
+            totalHistorys.map((value) => {
               return (
                 value.operator === "+" && (
                   <li key={value.id} className="historyItem">
@@ -21,7 +27,7 @@ function TransactionHistory() {
                       is
                       {` ${value.amount}`}
                     </span>
-                    <button className='btn-delete' onClick={() => deleteHistory(value.id)}>
+                    <button className='btn-delete' onClick={() => dispatch(deleteHistorys(value.id))}>
                       Delete
                     </button>
                   </li>
@@ -33,8 +39,8 @@ function TransactionHistory() {
       <div>
         <h2>Expense</h2>
         <ul>
-          {totalHistory.length > 0 &&
-            totalHistory.map((value) => {
+          {totalHistorys.length > 0 &&
+            totalHistorys.map((value) => {
               return (
                 value.operator === "-" && (
                   <li key={value.id} className="historyItem">
@@ -45,7 +51,7 @@ function TransactionHistory() {
                       is
                       {` ${value.amount}`}
                     </span>
-                    <button className='btn-delete' onClick={() => deleteHistory(value.id)}>
+                    <button className='btn-delete' onClick={() => dispatch(deleteHistorys(value.id))}>
                       Delete
                     </button>
                   </li>
