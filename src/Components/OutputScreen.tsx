@@ -1,15 +1,11 @@
-import React from "react";
-import { useContext, useState } from "react";
-import { outputContext } from "./Context/AuthContext";
 import "./OutputScreen.css";
-import { useSelector } from "react-redux";
-
+// import { useSelector } from "react-redux";
+import { useAppSelector } from "./Context/Store/hooks";
 
 function OutputScreen() {
-  const { availableAmount, totalIncome, totalExpense } =
-    useContext(outputContext);
-
-    const {availableAmounts, totalExpenses, totalIncomes} = useSelector((state) => state.expenseTracker);
+  const { availableAmounts, totalExpenses, totalIncomes } = useAppSelector(
+    (state) => state.expenseTracker,
+  );
   //   const [totalExpense, setTotalExpense] = useState(0);
   //   const [totalIncome, setTotalIncome] = useState(0);
   return (
@@ -22,12 +18,10 @@ function OutputScreen() {
         {availableAmounts !== 0 ? availableAmounts : 0}
       </div>
       <div className="total Income">
-        <span>Total Income</span>{" "}
-        <span>{totalIncomes}</span>
+        <span>Total Income</span> <span>{totalIncomes}</span>
       </div>
       <div className="total Expense">
-        <span>Total Expense</span>{" "}
-        <span>{totalExpenses}</span>
+        <span>Total Expense</span> <span>{totalExpenses}</span>
       </div>
     </div>
   );

@@ -1,6 +1,29 @@
-import { createSlice, nanoid } from "@reduxjs/toolkit";
+import { createSlice, nanoid, PayloadAction } from "@reduxjs/toolkit";
 
-const calculateTotals = (history) => {
+
+type HistoryItem = {
+  id: string;
+  operator: "+" | "-";
+  description: string;
+  amount: number;
+};
+
+type ExpenseTrackerState = {
+  availableAmounts: number;
+  totalExpenses: number;
+  totalIncomes: number;
+  totalHistorys: HistoryItem[];
+};
+
+type InputPayload = {
+  operator: "+" | "-";
+  description: string;
+  amount: string;
+};
+
+
+
+const calculateTotals = (history: HistoryItem[]) => {
   const income = history
     .filter((value) => {
       return value.operator === "+";
@@ -23,16 +46,19 @@ const calculateTotals = (history) => {
   };
 };
 
-export const expenseTrackerSlice = createSlice({
-  name: "expenseTracker",
-  initialState: {
+const initialState: ExpenseTrackerState =  {
     availableAmounts: 0,
     totalExpenses: 0,
     totalIncomes: 0,
     totalHistorys: [],
-  },
+  }
+
+  
+export const expenseTrackerSlice = createSlice({
+  name: "expenseTracker",
+  initialState,
   reducers: {
-    deleteHistorys: (state, action) => {
+    deleteHistorys: (state, action: PayloadAction<string>) => {
       state.totalHistorys = state.totalHistorys.filter(
         (deleteValue) => deleteValue.id !== action.payload,
       );
@@ -42,7 +68,7 @@ export const expenseTrackerSlice = createSlice({
       state.totalIncomes = totals.income;
       state.availableAmounts = totals.availableAmount;
     },
-    handleInputFormDatas: (state, action) => {
+    handleInputFormDatas: (state, action: PayloadAction<InputPayload>) => {
       state.totalHistorys.push({
         id: nanoid(),
         operator: action.payload.operator,
